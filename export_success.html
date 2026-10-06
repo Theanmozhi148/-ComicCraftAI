@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comic Exported Successfully - ComicCraft</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎉</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <span>🎨</span> Comic<span class="highlight">Craft</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+    </div>
+  </nav>
+
+  <!-- Success Main Content -->
+  <main class="container success-container">
+    <div class="success-card">
+      <div class="success-icon">
+        ✓
+      </div>
+      <h1 class="success-title">Comic Exported Successfully!</h1>
+      <p class="success-desc">
+        Your AI-powered comic has been successfully created! Dive back in and bring another story to life.
+      </p>
+
+      <div class="success-actions">
+        <a href="/" class="btn btn-primary" style="padding: 1rem; font-size: 1.05rem;">
+          🎨 Go Create Another Comic
+        </a>
+
+        {% if pdf_path %}
+        <a href="/download-pdf?file_path={{ pdf_path }}" class="btn btn-secondary" style="padding: 0.85rem; font-size: 0.95rem;">
+          📥 Download PDF Again
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>ComicCraft © 2026 • AI Comic Story Creator</p>
+  </footer>
+
+</body>
+</html>

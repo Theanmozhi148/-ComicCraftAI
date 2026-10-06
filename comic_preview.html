@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Comic Preview - ComicCraft</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <span>🎨</span> Comic<span class="highlight">Craft</span>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">← New Comic</a>
+      <button class="btn btn-primary btn-download-pdf" data-pdf-path="{{ pdf_path }}" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
+        📥 Download PDF
+      </button>
+    </div>
+  </nav>
+
+  <!-- Preview Container -->
+  <main class="container">
+    
+    <!-- Preview Header Banner -->
+    <header class="preview-header">
+      <div class="preview-title">
+        <h1>📖 Your Comic Preview</h1>
+        <div class="preview-meta">
+          {% if character_name %}<span class="badge">Hero: {{ character_name }}</span>{% endif %}
+          {% if setting %}<span class="badge">Setting: {{ setting }}</span>{% endif %}
+          {% if tone %}<span class="badge">Tone: {{ tone }}</span>{% endif %}
+          {% if style %}<span class="badge">Style: {{ style }}</span>{% endif %}
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary btn-download-pdf" data-pdf-path="{{ pdf_path }}">
+          📥 Download Your Comic as PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- Comic Panels Stack -->
+    <div class="panels-stack">
+      {% for panel in layout %}
+      <article class="panel-card">
+        <!-- Panel Title Banner -->
+        <div class="panel-banner">
+          <span>Panel {{ panel.panel }}: {{ panel.title }}</span>
+          <span style="font-size: 0.85rem; opacity: 0.8;">#{{ panel.panel }} of {{ layout|length }}</span>
+        </div>
+
+        <div class="panel-body">
+          <!-- Illustration Image -->
+          <div class="panel-image-container">
+            <img 
+              src="{{ panel.web_image_path or ('/' + panel.image_path) }}" 
+              alt="Panel {{ panel.panel }} Illustration" 
+              class="panel-img"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Narrative and Dialogues -->
+          <div class="panel-narrative">
+            {% if panel.scene_description %}
+            <p class="scene-desc">
+              {{ panel.scene_description }}
+            </p>
+            {% endif %}
+
+            {% if panel.caption %}
+            <div class="caption-box">
+              <strong>CAPTION:</strong> {{ panel.caption }}
+            </div>
+            {% endif %}
+
+            {% if panel.narration %}
+            <div class="narration-box">
+              <strong>NARRATION:</strong> {{ panel.narration }}
+            </div>
+            {% elif panel.text %}
+            <div class="narration-box">
+              {{ panel.text }}
+            </div>
+            {% endif %}
+
+            {% if panel.image_prompt %}
+            <div class="prompt-ref-box">
+              <strong>IMAGE PROMPT:</strong> {{ panel.image_prompt }}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- Bottom Action Bar -->
+    <div class="bottom-action-bar">
+      <button class="btn btn-primary btn-download-pdf" data-pdf-path="{{ pdf_path }}" style="padding: 1.1rem 2.2rem; font-size: 1.1rem;">
+        📥 Download Your Comic as PDF
+      </button>
+      <a href="/" class="btn btn-secondary" style="padding: 1.1rem 1.8rem; font-size: 1.1rem;">
+        ✨ Create Another Story
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>ComicCraft © 2026 • AI-Generated Comic Preview • Built with FastAPI, Gemini & Stable Diffusion</p>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
